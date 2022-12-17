@@ -11,7 +11,7 @@ import { GLOBAL } from './services/global';
 })
 
 export class AppComponent implements OnInit {
-	public title = 'MusicFy!';
+	public title = 'TicoBeats';
 	public user: User;
 	public user_register: User;
 	public identity: User;
@@ -25,9 +25,15 @@ export class AppComponent implements OnInit {
 		private _userService: UserService,
 		private _route: ActivatedRoute,
 		private _router: Router,
+<<<<<<< HEAD
 	){
 		this.user = new User('', '', '', '', '', 'ROLE_ADMIN', '');
 		this.user_register = new User('', '', '', '', '', 'ROLE_ADMIN', '');
+=======
+	) {
+		this.user = new User('', '', '', '', '', 'ROLE_USER', '');
+		this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
+>>>>>>> 4710312b0175ffa87b6e34ea7188e6585533455c
 		this.url = GLOBAL.url;
 	}
 
@@ -39,11 +45,11 @@ export class AppComponent implements OnInit {
 	public onSubmit() {
 		// Conseguir los datos del usuario identificado
 		this._userService.signup(this.user, null).subscribe(
-			(res : any) => {
+			(res: any) => {
 				let identity = res.user;
 				this.identity = identity;
 
-				if(!this.identity._id) {
+				if (!this.identity._id) {
 					this.errorLogin = "El usuario no está correctamente logueado";
 				} else {
 					// Crear sesión en el LocalStorage para tener al usuario en sesión
@@ -52,11 +58,11 @@ export class AppComponent implements OnInit {
 
 					// Conseguir el token para enviarselo a cada petición HTTP
 					this._userService.signup(this.user, 'true').subscribe(
-						(res : any) => {
+						(res: any) => {
 							let token = res.token;
 							this.token = token;
 
-							if(this.token.length <= 0) {
+							if (this.token.length <= 0) {
 								this.errorLogin = "El token no se ha generado";
 							} else {
 								// Crear sesión en el LocalStorage para tener al usuario en sesión
@@ -65,20 +71,20 @@ export class AppComponent implements OnInit {
 								this.user = new User('', '', '', '', '', 'ROLE_ADMIN', '');
 							}
 						},
-						(err : any) => {
+						(err: any) => {
 							var errorLogin = <any>err;
-							
-							if(errorLogin != null) {
+
+							if (errorLogin != null) {
 								this.errorLogin = err.message;
 							}
 						}
 					);
 				}
 			},
-			(err : any) => {
+			(err: any) => {
 				var errorLogin = <any>err;
-				
-				if(errorLogin != null) {
+
+				if (errorLogin != null) {
 					this.errorLogin = err.message;
 				}
 			}
@@ -94,22 +100,22 @@ export class AppComponent implements OnInit {
 
 	public onSubmitRegister() {
 		this._userService.register(this.user_register).subscribe(
-			(res : any) => {
+			(res: any) => {
 				let user = res.user;
 				this.user_register = user;
-				if(this.user._id == null) {
+				if (this.user._id == null) {
 					this.alertRegister = "No se ha registrado el usuario";
 					this.typeRegisterMessage = "alert-danger";
 				} else {
-					this.alertRegister = "El registro se ha completado correctamente, accede con tu email: "+this.user_register.email;
+					this.alertRegister = "El registro se ha completado correctamente, accede con tu email: " + this.user_register.email;
 					this.typeRegisterMessage = "alert-info";
 					this.user_register = new User('', '', '', '', '', 'ROLE_ADMIN', '');
 				}
 			},
-			(err : any) => {
+			(err: any) => {
 				var errorLogin = <any>err;
-				
-				if(errorLogin != null) {
+
+				if (errorLogin != null) {
 					this.alertRegister = err.message;
 					this.typeRegisterMessage = "alert-danger";
 				}
