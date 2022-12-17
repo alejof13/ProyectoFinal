@@ -1,0 +1,21 @@
+<div class="row">
+	<div class="col-lg-12 pt-4 pb-4">
+		<h2>{{title}}</h2>
+		<form #searchForm="ngForm" (ngSubmit)="onSearch()">
+			<div class="input-group mb-3">
+				<input type="text" #searchText="ngModel" name="searchText" id="searchText" [(ngModel)]="search" class="form-control" placeholder="Artista, álbum, canción..." aria-label="Ingresa tu búsqueda"
+					aria-describedby="button-addon2" required>
+				<div class="input-group-append">
+					<button class="btn btn-outline-dark" type="reset" id="button-addon2"><i class="fas fa-trash"></i></button>
+					<button class="btn btn-dark" type="submit" id="button-addon2" [disabled]="!searchForm.form.valid"><i class="fas fa-search"></i></button>
+				</div>
+			</div>
+		</form>
+		<br>
+		<div class="row">
+			<div class="col-lg-12">
+				<p>Cuando sea el momento, verás los resultados de búscar esto "{{search}}", aquí.</p>
+			</div>
+		</div>
+	</div>
+</div>

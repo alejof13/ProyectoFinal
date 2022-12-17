@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="col-lg-12 pt-4 pb-4">
+		<!--<h2>{{title}}</h2>-->
+		<div class="banner-home rounded pt-5 pb-5 pl-5 pr-5">
+			<h2 class="banner-title">Bienvenido a MusicFy!</h2>
+			<p class="banner-description">Navega para escuchar tu música preferida.</p>
+			<!--<a href="#" class="btn btn-dark" [routerLink]="['/artists/1']">Ver artistas</a>-->
+		</div>
+		<br *ngIf="artists">
+		<div *ngIf="artists">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3>Artístas</h3>
+					<div class="row row-cols-6 row-cols-md-4">
+						<div *ngFor="let artist of artists" class="col mb-4">
+							<div class="card">
+								<img src="{{url+'get-image-artist/'+artist.image}}" class="card-img-top" alt="...">
+								<div class="card-body">
+									<p class="card-text"><strong><a class="text-decoration-none text-dark" [routerLink]="['/artist/', artist._id]" href="#">{{artist.name}}</a></strong></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br *ngIf="albums">
+		<div *ngIf="albums">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3>Álbumes</h3>
+					<div class="row row-cols-6 row-cols-md-4">
+						<div *ngFor="let album of albums" class="col mb-4">
+							<div class="card">
+								<img src="{{url+'get-image-album/'+album.image}}" class="card-img-top" alt="...">
+								<div class="card-body">
+									<p class="card-text"><strong><a class="text-decoration-none text-dark" [routerLink]="['/album/', album._id]" href="#">{{album.title}}</a></strong><span class="capsule bg-main text-white ml-2">{{album.year}}</span></p>
+									<p>De <a class="text-dark" href="#" [routerLink]="['/artist', album.artist._id]"><strong>{{album.artist.name}}</strong></a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br *ngIf="songs">
+		<div *ngIf="songs">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3>Canciones</h3>
+					<div class="row row-cols-6 row-cols-md-4">
+						<div *ngFor="let song of songs" class="col mb-4">
+							<div class="card">
+								<img src="{{url+'get-image-album/'+song.album.image}}" class="card-img-top" alt="...">
+								<div class="card-body">
+									<p class="card-text"><strong><a class="text-decoration-none text-dark" [routerLink]="['/album/', song.album._id]" href="#">{{song.name}}</a></strong></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

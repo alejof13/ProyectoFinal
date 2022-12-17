@@ -1,0 +1,163 @@
+<div class="container-fluid" *ngIf="identity">
+	<div class="row">
+		<div class="sidebar col-lg-2 col-md-3 col-sm-4 bg-sidebar">
+			<div class="row">
+				<div class="col-lg-12 text-center pt-4 pb-4">
+					<a class="navbar-brand text-dark" [routerLink]="['/home']" href="#">
+						<img src="./../assets/img/icon.svg" width="30" height="30" class="d-inline-block align-top"
+							alt="" loading="lazy">
+						{{title}}
+					</a>
+				</div>
+			</div>
+			<div class="row sidebar-menu">
+				<div class="col-lg-12">
+					<div class="navigation">
+						<a class="navigation-item rounded" href="#" [routerLink]="['/search']">
+							<i class="navigation-icon fas fa-search"></i>
+							<span class="navigation-title">
+								Buscar
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#" [routerLink]="['/recent']">
+							<i class="navigation-icon fas fa-clock"></i>
+							<span class="navigation-title">
+								Reciente
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#" [routerLink]="['/artists', 1]" [routerLinkActive] = "['actived']">
+							<i class="navigation-icon fas fa-user-alt"></i>
+							<span class="navigation-title">
+								Artistas
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#" [routerLink]="['/all-albums', 1]">
+							<i class="navigation-icon fas fa-portrait"></i>
+							<span class="navigation-title">
+								Álbumes
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#" [routerLink]="['/songs', 1]">
+							<i class="navigation-icon fas fa-music"></i>
+							<span class="navigation-title">
+								Canciones
+							</span>
+						</a>
+						<div class="navigation-divider"></div>
+						<a class="navigation-item-perfil rounded" href="#" [routerLink]="['/mis-datos']">
+							<img *ngIf="user.image != 'null'" id="avatar_header_usuario" class="rounded-circle navigation-image" src="{{url+'get-image-user/'+identity.image}}" alt="">
+							<span id="identity_name" class="navigation-title">{{identity.name}} {{identity.surname}}</span>
+						</a>
+						<!--<a class="navigation-item rounded" href="#" [routerLink]="['/mis-datos']" [routerLinkActive] = "['actived']">
+							<i class="navigation-icon fas fa-cog"></i>
+							<span class="navigation-title">
+								Mi cuenta
+							</span>
+						</a>-->
+						<a class="navigation-item rounded" (click)="logout()" href="#">
+							<i class="navigation-icon fas fa-sign-out-alt"></i>
+							<span class="navigation-title">
+								Salir
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!--<div class="space-bar-player"></div>-->
+		</div>
+		<div class="general-container col-lg-10 col-md-9 col-sm-8">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<router-outlet></router-outlet>
+						<div class="space-bar-player"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<player></player>
+	</div>
+</div>
+
+<!-- Form de inicio de sesión -->
+<div class="container" *ngIf="!identity">
+	<div class="row my-5">
+		<div class="card">
+			<div class="row no-gutters">
+				<div class="col-lg-4">
+					<img src="./../assets/img/home_banner.jpg" class="card-img" alt="...">
+				</div>
+				<div class="col-md-8">
+					<div class="card-body">
+						<h5 class="card-title">¡Hola, bienvenido!</h5>
+						<p class="card-text">Este es un proyecto desarrollado através de un Curso de Desarrollo Web con Angular, Mongo DB y MinStack.</p>
+						<p class="card-text"><small class="text-muted">Inicia sesión para acceder a la aplicación o registrate si aún no tienes una cuenta.</small></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row my-5">
+		<div class="col-lg-6">
+			<h2>Identifícate</h2>
+			<div *ngIf="errorLogin" class="alert alert-danger" role="alert">
+				{{errorLogin}}
+			</div>
+			<form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md">
+				<p>
+					<label for="log_email">Correo electrónico</label>
+					<input type="email" #log_email="ngModel" name="log_email" id="log_email" [(ngModel)]="user.email" class="form-control" placeholder="email@company.com" required>
+					<span *ngIf="!log_email.valid && log_email.touched" class="text-danger">
+						Email requerido
+					</span>
+				</p>
+				<p>
+					<label for="log_password">Contraseña</label>
+					<input type="password" #log_password="ngModel" name="log_password" id="log_password" [(ngModel)]="user.password" class="form-control" placeholder="Contraseña" required>
+					<span *ngIf="!log_password.valid && log_password.touched" class="text-danger">
+						Contraseña requerida
+					</span>
+				</p>
+				<button type="submit" class="btn btn-success" value="Entrar">Entrar</button>
+			</form>
+		</div>
+		
+		<div class="col-lg-6">
+			<h2>Regístrate</h2>
+			<div *ngIf="alertRegister" class="alert {{typeRegisterMessage}}" role="alert">
+				{{alertRegister}}
+			</div>
+			<form #registerForm="ngForm" (ngSubmit)="onSubmitRegister()" class="col-md">
+				<p>
+					<label for="reg_name">Nombre (s)</label>
+					<input type="text" #reg_name="ngModel" name="reg_name" id="reg_name" [(ngModel)]="user_register.name" class="form-control" placeholder="Nombre" required>
+					<span *ngIf="!reg_name.valid && reg_name.touched" class="text-danger">
+						Nombre requerido
+					</span>
+				</p>
+				<p>
+					<label for="reg_surname">Apellidos</label>
+					<input type="text" #reg_surname="ngModel" name="reg_surname" id="reg_surname" [(ngModel)]="user_register.surname" class="form-control" placeholder="Apellidos" required>
+					<span *ngIf="!reg_surname.valid && reg_surname.touched" class="text-danger">
+						Apellidos requeridos
+					</span>
+				</p>
+				<p>
+					<label for="reg_email">Correo electrónico</label>
+					<input type="email" #reg_email="ngModel" name="reg_email" id="reg_email" [(ngModel)]="user_register.email" class="form-control" placeholder="correo@dominio.com" required>
+					<span *ngIf="!reg_email.valid && reg_email.touched" class="text-danger">
+						Correo electrónico requeridos
+					</span>
+				</p>
+				<p>
+					<label for="reg_password">Contraseña</label>
+					<input type="password" #reg_password="ngModel" name="reg_password" id="reg_password" [(ngModel)]="user_register.password" class="form-control" placeholder="Contraseña" required>
+					<span *ngIf="!reg_password.valid && reg_password.touched" class="text-danger">
+						Contraseña requerida
+					</span>
+				</p>
+				<button type="submit" class="btn btn-primary" value="Registrarse">Regístrarse</button>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-lg-12 pt-4 pb-4">
+		<h2>{{title}}</h2>
+		<div *ngIf="alertMessage" class="alert {{typeMessage}}">
+			{{alertMessage}}
+		</div>
+		<br>
+		<div *ngIf="songs">
+			<div class="row">
+				<div class="col-lg-9"></div>
+				<div class="col-lg-3">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-end">
+							<li class="page-item">
+								<a class="page-link text-dark" [routerLink]="['/songs/', prev_page]" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+							</li>
+							<li class="page-item">
+								<a class="page-link text-dark" [routerLink]="['/songs/', next_page]" href="#"><i class="fas fa-chevron-right"></i></a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="row row-cols-6 row-cols-md-4">
+				<div *ngFor="let song of songs" class="col mb-4">
+					<div class="card">
+						<img src="{{url+'get-image-album/'+song.album.image}}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text"><strong><a class="text-decoration-none text-dark" [routerLink]="['/album/', song.album._id]" href="#">{{song.name}}</a></strong></p>
+							<p class="card-text">{{song.album.title}}<span class="capsule bg-main text-white ml-2">{{song.album.year}}</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+	<div class="col-lg pt-4 pb-4">
+		<h2>{{title}}</h2>
+		<p>Completa los datos para agregar un nuevo artista.</p>
+		<div class="row">
+			<div class="col-lg-6">
+				<div *ngIf="alertMessage" class="alert {{typeMessage}}" role="alert">
+					{{alertMessage}}
+				</div>
+				<form #artistCreateForm="ngForm" (ngSubmit)="onSubmit()">
+					<div *ngIf="isEdit">
+						<div class="text-center" *ngIf="artist.image && artist.image != 'null'">
+							<img id="avatar_form_artist" src="{{url+'get-image-artist/'+artist.image}}" alt="" width="240px" height="240px" class="rounded-circle">
+						</div>
+						<p>
+							<label for="arcr_image">Subir imagen</label><br>
+							<input type="file" name="arcr_image" id="arcr_image" placeholder="Selecciona un archivo..." (change)="fileChangeEvent($event)">
+						</p>
+					</div>
+					<p>
+						<label for="arcr_name">Nombre (s)</label>
+						<input type="text" #arcr_name="ngModel" name="arcr_name" id="arcr_name" [(ngModel)]="artist.name" class="form-control" placeholder="Nombre" value="" required>
+						<span *ngIf="!arcr_name.valid && arcr_name.touched" class="text-danger">
+							Nombre requerido
+						</span>
+					</p>
+					<p>
+						<label for="arcr_description">Descripción</label>
+						<textarea rows="3" resize="false" style="resize: none" #arcr_description="ngModel" name="arcr_description" id="arcr_description" [(ngModel)]="artist.description" class="form-control" placeholder="Agrega una descripción" required></textarea>
+						<span *ngIf="!arcr_description.valid && arcr_description.touched" class="text-danger">
+							Descripción requerida
+						</span>
+					</p>
+					<button [disabled]="!artistCreateForm.form.valid" type="submit" class="btn btn-dark" value="{{legendButtonForm}}">{{legendButton}}</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

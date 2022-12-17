@@ -1,0 +1,7 @@
+use curso_mean2;
+
+db.artist.save({
+	"name": 'Luis Fonsi',
+	"description": 'Música en español pop',
+	"image": null
+});

@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&display=swap');
+
+html, body {
+	margin: 0px;
+	box-sizing: border-box;
+	font-family: 'Raleway', sans-serif;
+}
+
+.sidebar {
+	height: 100vh;
+	max-height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+	.sidebar .sidebar-menu {
+		height: calc(100% - 88px);
+	}
+
+.general-container {
+	height: 100vh;
+	max-height: 100vh;
+	overflow: auto;
+}
+
+.bg-main {
+	background-color: #E39631;
+}
+
+.bg-main-blur {
+	background: rgba(227, 150, 49, 0.25);
+	backdrop-filter: blur(8px);
+}
+
+.bg-sidebar {
+	background-color: #F6F6f6;
+}
+
+/* SECTIONS OF PLAYER */
+player {
+	display: block;
+	width: 100%;
+	height: 94px;
+	max-height: 94px;
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(16px);
+	position: fixed;
+	bottom: 0;
+	z-index: 10;
+}
+
+	player .image-album {
+		width: 94px;
+	}
+
+	.player-song-title,
+	.player-song-artist,
+	.player-song-artist a,
+	.player-song-progressbar {
+		display: block;
+	}
+
+	.player-song-title {
+		font-size: 16px;
+		line-height: 16px;
+		margin-bottom: 4px;
+	}
+
+	.player-song-artist {
+		font-size: 14px;
+		line-height: 14px;
+		margin-bottom: 4px
+	}
+
+	.player-song-artist a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.player-song-area {
+		width: 100%;
+		height: 24px;
+		border-radius: 12px;
+		background-color: rgba(68, 68, 68, 0.25);
+		cursor: pointer;
+	}
+
+		.player-song-area audio {
+			display: block;
+			width: 100%;
+			height: inherit;
+		}
+	
+	.controls {
+		display: block;
+		width: 100%;
+		color: #343A40;
+		height: 100%;
+	}
+
+		.controls .options {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.controls .options a {
+			height: 40px;
+			display: inline;
+			font-size: 16px;
+			line-height: 40px;
+			width: 40px;
+			text-align: center;
+			text-decoration: none;
+			color: inherit;
+			margin: 2px 6px;
+			-webkit-transition: all ease-in 250ms;
+			-o-transition: all ease-in 250ms;
+			transition: all ease-in 250ms;
+			user-select: none;
+		}
+
+		.controls .options a:hover {
+			color: #E39631;
+		}
+
+		.controls .options a.active {
+			color: #E39631;
+		}
+
+		.controls .options a.active:hover {
+			color: #343A40;
+		}
+
+.space-bar-player {
+	height: 94px;
+}
+
+/* NAVIGATION */
+.navigation {
+	-webkit-transition: all ease-in 250ms;
+	-o-transition: all ease-in 250ms;
+	transition: all ease-in 250ms;
+	user-select: none;
+}
+
+.navigation-divider {
+	margin: 4px 0px;
+	background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    height: 1px;
+}
+	
+	.navigation a.navigation-item,
+	.navigation a.navigation-item-perfil {
+		margin: 4px 0px;
+	}
+
+	.navigation a.navigation-item:first-child,
+	.navigation a.navigation-item-perfil:first-child {
+		margin-top: 0px;
+	}
+
+	.navigation a.navigation-item:last-child,
+	.navigation a.navigation-item-perfil:last-child {
+		margin-bottom: 0px;
+	}
+
+	.navigation a.navigation-item {
+		color: inherit;
+		text-decoration: none;
+		display: block;
+		font-size: 16px;
+		line-height: 20px;
+		padding: 14px 15px;
+		height: 48px;
+		transition: inherit;
+	}
+
+	.navigation a.navigation-item:hover {
+		color: white;
+		background-color: rgba(0, 0, 0, 1);
+	}
+
+		.navigation a.navigation-item .navigation-icon {
+			width: 20px;
+			height: 20px;
+			text-align: center;
+			float: left;
+			margin-right: 16px;
+		}
+
+		.navigation a.navigation-item.actived {
+			color: white;
+			background-color: rgba(0, 0, 0, 1);
+		}
+
+	.navigation a.navigation-item-perfil {
+		color: inherit;
+		text-decoration: none;
+		display: block;
+		font-size: 16px;
+		line-height: 28px;
+		padding: 10px 15px 10px 11px;
+		height: 48px;
+		transition: inherit;
+		cursor: default;
+	}
+
+		.navigation a.navigation-item-perfil .navigation-image {
+			float: left;
+			height: 28px;
+			width: 28px;
+			margin-right: 16px;
+		}
+
+/* BANNER HOME */
+.banner-home {
+	background: #f7dcbc;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right,#f7dcbc, #f0941b);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right,#f7dcbc, #f0941b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+	.banner-home .banner-title {
+		font-size: 32px;
+	}
+
+	.banner-home .banner-description {
+		font-size: 16px;
+	}
+
+/* BANNER FULL */
+.banner-full {
+	display: block;
+	min-height: 480px;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	overflow: hidden;
+	user-select: none;
+}
+
+.banner-full-container {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	align-items: flex-end;
+	width: 100%;
+	height: 100%;
+}
+
+.banner-info {
+	width: 100%;
+	background: rgba(86, 86, 86, 0.25);
+	backdrop-filter: blur(8px);
+}
+
+.capsule {
+	display: inline;
+	margin: 0px 4px;
+	padding: 2px 8px;
+	border-radius: 8px;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	user-select: none;
+}
+
+	.capsule:first-child {
+		margin-left: 0px;
+	}
+
+	.capsule:last-child {
+		margin-right: 0px;
+	}

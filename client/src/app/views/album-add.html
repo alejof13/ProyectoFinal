@@ -1,0 +1,73 @@
+<div class="row">
+	<div class="col-lg-12 pt-4 pb-4">
+		<div *ngIf="artist && artist != null" class="row">
+			<div class="col-lg-6">
+				<h2>Artísta</h2>
+				<div class="rounded bg-main-blur p-4">
+					<div class="row flex align-items-center">
+						<div class="col-lg-3">
+							<img class="img-fluid rounded" src="{{url + 'get-image-artist/' + artist.image}}" alt="">
+						</div>
+						<div class="col-lg-9">
+							<h6><a class="text-dark" href="#" [routerLink]="['/artist', artist._id]"><strong>{{artist.name}}</strong></a></h6>
+							<div *ngIf="listDescription">
+								<span *ngFor="let desc of listDescription" class="capsule text-white bg-dark">
+									{{desc}}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+		<br *ngIf="artist && artist != null">
+		<div class="row">
+			<div class="col-lg-12">
+				<h3>{{title}}</h3>
+				<p>Completa los datos del album</p>
+				<div class="row">
+					<div class="col-lg-6">
+						<div *ngIf="alertMessage" class="alert {{typeMessage}}" role="alert">
+							{{alertMessage}}
+						</div>
+						<form #albumAddForm="ngForm" (ngSubmit)="onSubmit()">
+							<div *ngIf="isEdit">
+								<div class="text-center">
+									<img id="image_for_album" *ngIf="album.image && album.image != 'null'" src="{{url + 'get-image-album/' + album.image}}" alt="" width="240px" height="240px" class="rounded">
+								</div>
+								<p>
+									<label for="alup">Subir imagen</label><br>
+									<input type="file" name="alup" id="alup" placeholder="Selecciona un archivo..." (change)="fileChangeEvent($event)">
+								</p>
+							</div>
+							<p>
+								<label for="alad_title">Título</label>
+								<input type="text" #alad_title="ngModel" name="alad_title" id="alad_title" [(ngModel)]="album.title"
+									class="form-control" placeholder="Título" value="" required>
+								<span *ngIf="!alad_title.valid && alad_title.touched" class="text-danger">
+									Nombre requerido
+								</span>
+							</p>
+							<p>
+								<label for="alad_description">Descripción</label>
+								<textarea rows="3" resize="false" style="resize: none" #alad_description="ngModel" name="alad_description" id="alad_description" [(ngModel)]="album.description" class="form-control" placeholder="Agrega una descripción" required></textarea>
+								<span *ngIf="!alad_description.valid && alad_description.touched" class="text-danger">
+									Descripción requerida
+								</span>
+							</p>
+							<p>
+								<label for="alad_year">Año</label>
+								<input type="text" #alad_year="ngModel" name="alad_year" id="alad_year" [(ngModel)]="album.year"
+									class="form-control" placeholder="Año" value="" required>
+								<span *ngIf="!alad_year.valid && alad_year.touched" class="text-danger">
+									Año requerido
+								</span>
+							</p>
+							<button [disabled]="!albumAddForm.form.valid" type="submit" class="btn btn-dark" value="{{legendButton}}">{{legendButton}}</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

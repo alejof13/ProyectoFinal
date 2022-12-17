@@ -1,0 +1,28 @@
+<div class="pl-4 pt-2 pb-2 pr-4">
+	<div class="container-fluid">
+		<div class="row flex align-items-center">
+			<div class="col-lg-1 col-md-2 text-center">
+				<img id="player-song-image" class="image-album img-fluid rounded" src="{{url + 'get-image-album/' + playerSongImage}}" alt="">
+			</div>
+			<div class="col-lg-9 col-md-7">
+				<span id="player-song-title" class="player-song-title"><strong>{{playerSongTitle}}</strong></span>
+				<span id="player-song-artist" class="player-song-artist"><a href="#">{{playerSongArtist}}</a></span>
+				<div class="player-song-area">
+					<audio id="player-controls" preload="auto" controls>
+						<source id='player-source' src="" type='audio/mpeg' />
+					</audio>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-3">
+				<div class="controls">
+					<div class="options">
+						<a (click)="playSong()"><i class="fas fa-play"></i></a>
+						<a (click)="pauseSong()"><i class="fas fa-pause"></i></a>
+						<a (click)="volumeDown()"><i class="fas fa-volume-down"></i></a>
+						<a (click)="volumeUp()"><i class="fas fa-volume-up"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

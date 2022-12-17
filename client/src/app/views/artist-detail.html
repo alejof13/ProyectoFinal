@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-lg-12 pt-4">
+				<div id="bannerArtist" class="banner-full rounded">
+					<div class="banner-full-container text-white">
+						<div class="banner-info flex-row align-items-end p-5">
+							<h2>{{title}}</h2>
+							<div>
+								<span *ngFor="let desc of listDescription" class="capsule bg-main">
+									{{desc}}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>Álbumes</h2>
+				<div *ngIf="alertMessage" class="alert {{typeMessage}}">
+					{{alertMessage}}
+				</div>
+				<div *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+					<p>Gestionar albumes registrados</p>
+					<a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/create-album', artist._id]" href="#" class="btn btn-dark">Agregar album</a>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div *ngIf="albums">
+			<div class="row">
+				<div class="col-lg-9"></div>
+				<div class="col-lg-3">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-end">
+							<li class="page-item">
+								<a class="page-link text-dark" [routerLink]="['/albums/', prev_page]" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+							</li>
+							<li class="page-item">
+								<a class="page-link text-dark" [routerLink]="['/albums/', next_page]" href="#"><i class="fas fa-chevron-right"></i></a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="row row-cols-6 row-cols-md-4">
+				<div *ngFor="let album of albums" class="col mb-4">
+					<div class="card">
+						<img src="{{url+'get-image-album/'+album.image}}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text"><a class="text-decoration-none text-dark" [routerLink]="['/album/', album._id]" href="#">{{album.title}}</a></p>
+							<div *ngIf="identity.role == 'ROLE_ADMIN'">
+								<a [routerLink]="['/edit-album/', album._id]" href="#" class="btn btn-dark">Editar</a>
+								<a [swal]="{title: 'Atención', text: '¿Eliminar album?', icon: 'warning', showCancelButton: true, reverseButtons: true, focusConfirm: false, confirmButtonText: 'Aceptar', cancelButtonText: 'Cancelar'}" (confirm)="deleteAlbumConfirm(album._id)" href="#" class="ml-1 btn btn-danger">Eliminar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
