@@ -10,8 +10,9 @@ body {
 td, th {
 	color: #fff;
 }
-
-
+p.card-text {
+    color: #000;
+}
 .sidebar {
 	height: 100vh;
 	max-height: 100vh;
